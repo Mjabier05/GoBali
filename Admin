@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoBali - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script>
+        tailwind.config = {theme:{extend:{colors:{primary:'#00AA13'}}}}
+    </script>
+</head>
+<body class="bg-gray-50">
+<header class="bg-white shadow p-4 flex items-center gap-2">
+    <i class="fa fa-shield text-primary text-2xl"></i>
+    <h1 class="text-xl font-bold text-primary">Panel Admin GoBali</h1>
+</header>
+<main class="container mx-auto px-4 py-4 max-w-lg">
+    <div class="grid grid-cols-3 gap-3 mb-4">
+        <div class="bg-white p-3 rounded-xl shadow text-center">
+            <p class="text-xs text-gray-600">Pengguna</p>
+            <p class="font-bold text-lg">1.245</p>
+        </div>
+        <div class="bg-white p-3 rounded-xl shadow text-center">
+            <p class="text-xs text-gray-600">Pengemudi</p>
+            <p class="font-bold text-lg">312</p>
+        </div>
+        <div class="bg-white p-3 rounded-xl shadow text-center">
+            <p class="text-xs text-gray-600">Pesanan</p>
+            <p class="font-bold text-lg">8.790</p>
+        </div>
+    </div>
+    <div class="bg-white rounded-2xl p-5 shadow mb-4">
+        <h3 class="font-bold mb-3">Pengaturan Tarif & Komisi</h3>
+        <div class="space-y-3 text-sm">
+            <div><label class="block mb-1">Komisi Platform (10%)</label>
+                <input type="number" value="10" class="w-full p-2 border rounded-lg" id="inputKomisi"></div>
+            <div><label class="block mb-1">Tarif Motor per Km (Rp2500)</label>
+                <input type="number" value="2500" class="w-full p-2 border rounded-lg"></div>
+            <div><label class="block mb-1">Tarif Mobil per Km (Rp5500)</label>
+                <input type="number" value="4500" class="w-full p-2 border rounded-lg"></div>
+            <button class="w-full py-2 bg-primary text-white rounded-lg mt-2">Simpan Pengaturan</button>
+        </div>
+    </div>
+    <div class="bg-white rounded-2xl p-5 shadow">
+        <h3 class="font-bold mb-3">Laporan Pendapatan</h3>
+        <div class="space-y-2 text-sm">
+            <div class="flex justify-between"><span>Total Komisi Bulan Ini</span><span class="font-bold">Rp 45.230.000</span></div>
+            <div class="flex justify-between"><span>Total Transfer Pengemudi</span><span>Rp 180.920.000</span></div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
