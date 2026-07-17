@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurir LaundryBali</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script>
+        tailwind.config = {theme:{extend:{colors:{primary:'#2563eb',success:'#10b981',danger:'#ef4444'}}}}
+    </script>
+</head>
+<body class="bg-gray-50 max-w-md mx-auto pb-20">
+<header class="bg-primary text-white p-4 sticky top-0">
+    <div class="flex justify-between items-center">
+        <div>
+            <h1 class="text-lg font-bold">Aplikasi Kurir</h1>
+            <p class="text-xs opacity-80">Saldo: Rp 320.500</p>
+        </div>
+        <button class="bg-white text-primary px-3 py-1 rounded-full text-sm font-medium">ONLINE</button>
+    </div>
+</header>
+
+<main class="p-4">
+    <!-- Pesanan Penjemputan -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-4">
+        <div class="p-4 border-b">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold">Pesanan Penjemputan Baru</h3>
+                <span class="text-lg font-bold text-success">+ Rp 7.200</span>
+            </div>
+        </div>
+        <div class="p-4">
+            <p class="text-sm mb-2"><i class="fa fa-user mr-2 text-gray-500"></i> Ibu Wayan - Denpasar</p>
+            <p class="text-sm mb-2"><i class="fa fa-map-marker mr-2 text-gray-500"></i> Jl. Raya Puputan No.45</p>
+            <p class="text-sm mb-3"><i class="fa fa-clock-o mr-2 text-gray-500"></i> Harus dijemput sebelum 12.00</p>
+            <div class="flex gap-2">
+                <button class="flex-1 bg-danger text-white py-2 rounded-lg">Lewati</button>
+                <button class="flex-1 bg-primary text-white py-2 rounded-lg">AMBIL & KE LOKASI</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Peta & Navigasi -->
+    <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
+        <h3 class="font-bold mb-2">Lokasi Tujuan</h3>
+        <div class="h-40 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500 mb-2">
+            <i class="fa fa-map-o text-3xl"></i>
+            <p class="ml-2">Peta & Rute Arah</p>
+        </div>
+        <button class="w-full bg-green-500 text-white py-2 rounded-lg">BUKA NAVIGASI</button>
+    </div>
+
+    <!-- Riwayat -->
+    <h3 class="font-bold mb-2">Hari Ini: 8 Pengantaran Selesai</h3>
+</main>
+
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t max-w-md mx-auto">
+    <div class="flex justify-around py-2 text-sm">
+        <a href="#" class="text-primary flex flex-col items-center"><i class="fa fa-bolt"></i>Pesanan</a>
+        <a href="#" class="text-gray-500 flex flex-col items-center"><i class="fa fa-history"></i>Riwayat</a>
+        <a href="#" class="text-gray-500 flex flex-col items-center"><i class="fa fa-wallet"></i>Saldo</a>
+    </div>
+</nav>
+</body>
+</html>

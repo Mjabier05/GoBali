@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1E293B">
+    <title>Panel Admin - LaundryBali</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        admin: '#1E293B',
+                        aksen: '#2563eb',
+                        sukses: '#10b981',
+                        peringatan: '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>.tab-aktif{color:#2563eb;border-bottom:2px solid #2563eb;}.tab-konten.hidden{display:none;}</style>
+</head>
+<body class="bg-gray-50 max-w-md mx-auto pb-24">
+<header class="bg-admin text-white p-4 sticky top-0 z-50">
+    <div class="flex justify-between items-center">
+        <div><h1 class="text-lg font-bold">Panel Admin</h1><p class="text-xs opacity-70">Pengaturan Sistem</p></div>
+        <button class="bg-white text-admin px-3 py-1 rounded-full text-sm font-medium">Keluar</button>
+    </div>
+</header>
+<div class="bg-white border-b sticky top-[72px] z-40">
+    <div class="flex justify-around text-sm font-medium">
+        <button class="py-3 px-2 tab-aktif" onclick="tampilkanTab('tarif')">Tarif</button>
+        <button class="py-3 px-2 text-gray-500" onclick="tampilkanTab('bagi')">Bagi Hasil</button>
+        <button class="py-3 px-2 text-gray-500" onclick="tampilkanTab('promo')">Promo</button>
+        <button class="py-3 px-2 text-gray-500" onclick="tampilkanTab('area')">Area</button>
+        <button class="py-3 px-2 text-gray-500" onclick="tampilkanTab('kurir')">Kurir</button>
+    </div>
+</div>
+<main class="p-4">
+    <div id="tab-tarif" class="tab-konten">
+        <h3 class="font-bold text-lg mb-4">🚚 Pengaturan Tarif Ongkir</h3>
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+            <div class="mb-3"><label class="text-sm font-medium">Tarif Dasar Antar-Jemput (Rp)</label><input type="number" id="tarifDasar" value="2000" class="w-full p-3 border rounded-lg mt-1"></div>
+            <div class="mb-3"><label class="text-sm font-medium">Tarif Tambahan per 1 km (Rp)</label><input type="number" id="tarifPerKm" value="1500" class="w-full p-3 border rounded-lg mt-1"></div>
+            <div class="mb-3"><label class="text-sm font-medium">Biaya Jasa Aplikasi (Rp)</label><input type="number" id="biayaAdmin" value="1000" class="w-full p-3 border rounded-lg mt-1"></div>
+        </div>
+    </div>
+    <div id="tab-bagi" class="tab-konten hidden">
+        <h3 class="font-bold text-lg mb-4">💰 Pembagian Keuntungan</h3>
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+            <div class="mb-3"><label class="text-sm font-medium">Bagian Mitra Laundry (%)</label><input type="number" id="bagiMitra" value="73" min="0" max="100" class="w-full p-3 border rounded-lg mt-1"></div>
+            <div class="mb-3"><label class="text-sm font-medium">Bagian Kurir (%)</label><input type="number" id="bagiKurir" value="15" min="0" max="100" class="w-full p-3 border rounded-lg mt-1"><p class="text-xs text-sukses mt-1">* Ongkir 100% milik kurir terpisah</p></div>
+            <div class="mb-3"><label class="text-sm font-medium">Bagian Aplikasi (%)</label><input type="number" id="bagiAdmin" value="12" readonly class="w-full p-3 border rounded-lg mt-1 bg-gray-100"></div>
+        </div>
+    </div>
+    <div id="tab-promo" class="tab-konten hidden">
+        <h3 class="font-bold text-lg mb-4">🎁 Pengaturan Promo</h3>
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+            <div class="mb-3"><label class="text-sm font-medium">Minimal Belanja Gratis Ongkir (Rp)</label><input type="number" id="minGratisOngkir" value="20000" class="w-full p-3 border rounded-lg mt-1"></div>
+            <div class="flex items-center gap-2 mt-4"><input type="checkbox" id="aktifPromo" checked class="w-4 h-4"><label class="text-sm font-medium">Aktifkan Gratis Ongkir</label></div>
+        </div>
+    </div>
+    <div id="tab-area" class="tab-konten hidden">
+        <h3 class="font-bold text-lg mb-4">📍 Tarif Khusus Area</h3>
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-4">
+            <div class="mb-3"><label class="text-sm">Denpasar (Rp/km)</label><input type="number" value="1000" class="w-full p-2 border rounded-lg mt-1"></div>
+            <div class="mb-3"><label class="text-sm">Kuta/Canggu (Rp/km)</label><input type="number" value="1500" class="w-full p-2 border rounded-lg mt-1"></div>
+            <div class="mb-3"><label class="text-sm">Ubud/Gianyar (Rp/km)</label><input type="number" value="2000" class="w-full p-2 border rounded-lg mt-1"></div>
+        </div>
+    </div>
+    <div id="tab-kurir" class="tab-konten hidden">
+        <h3 class="font-bold text-lg mb-4">📋 Verifikasi Pendaftar Kurir</h3>
+        <div class="bg-white p-4 rounded-xl shadow-sm mb-3">
+            <p class="font-medium">I Wayan Sudra</p>
+            <p class="text-xs text-gray-500">DK 1234 AB | Motor</p>
+            <span class="text-xs bg-yellow-100 text-yellow-700 px-2 rounded mt-2 inline-block">Menunggu Verifikasi</span>
+            <div class="flex gap-2 mt-3"><button class="flex-1 bg-sukses text-white py-2 rounded text-sm">TERIMA</button><button class="flex-1 bg-gray-200 py-2 rounded text-sm">LIHAT DOKUMEN</button></div>
+        </div>
+    </div>
+    <button onclick="alert('✅ Pengaturan Disimpan! Berlaku untuk semua aplikasi.')" class="w-full bg-aksen text-white py-3 rounded-xl font-bold mt-4"><i class="fa fa-save mr-2"></i>SIMPAN PERUBAHAN</button>
+</main>
+<script>
+function tampilkanTab(namaTab){document.querySelectorAll('.tab-konten').forEach(t=>t.classList.add('hidden'));document.getElementById('tab-'+namaTab).classList.remove('hidden');}
+document.getElementById('bagiMitra').oninput = document.getElementById('bagiKurir').oninput = function(){let m=parseInt(document.getElementById('bagiMitra').value)||0;let k=parseInt(document.getElementById('bagiKurir').value)||0;document.getElementById('bagiAdmin').value=100-m-k;}
+</script>
+</body>
+</html>
