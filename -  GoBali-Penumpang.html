@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoBali - Penumpang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        tailwind.config = {theme:{extend:{colors:{primary:'#00AA13'}}}}
+    </script>
+    <style>#peta{height:170px;border-radius:12px;}</style>
+</head>
+<body class="bg-gray-50 pb-16">
+<header class="bg-white shadow p-4 flex items-center gap-2 sticky top-0">
+    <i class="fa fa-motorcycle text-primary text-2xl"></i>
+    <h1 class="text-xl font-bold text-primary">GoBali - Penumpang</h1>
+</header>
+<main class="container mx-auto px-4 py-4 max-w-md">
+    <div id="peta" class="mb-4"></div>
+    <div class="bg-white rounded-2xl p-5 shadow mb-4">
+        <h2 class="font-bold mb-3">Pesan Perjalanan</h2>
+        <input type="text" id="jemput" placeholder="📍 Lokasi Jemput" class="w-full p-3 border rounded-xl mb-3">
+        <input type="text" id="tujuan" placeholder="🎯 Tujuan" class="w-full p-3 border rounded-xl mb-3">
+        <select id="layanan" class="w-full p-3 border rounded-xl mb-3">
+            <option value="motor">🛵 GoRide (Motor)</option>
+            <option value="mobil">🚗 GoCar (Mobil)</option>
+            <option value="kirim">📦 GoSend (Kirim Barang)</option>
+        </select>
+        <div class="bg-gray-50 p-3 rounded-xl mb-4 text-sm">
+            <div class="flex justify-between mb-1"><span>Jarak</span><span id="jarakVal">5 km</span></div>
+            <div class="flex justify-between mb-1"><span>Total Bayar</span><span id="totalVal" class="font-bold text-primary">Rp 18.000</span></div>
+        </div>
+        <button id="pesanBtn" class="w-full py-3 bg-primary text-white rounded-xl font-semibold">Pesan Sekarang</button>
+    </div>
+    <div id="status" class="hidden bg-white rounded-2xl p-5 shadow">
+        <h3 class="font-bold mb-2">Status</h3>
+        <p id="statusTxt" class="text-sm mb-3">Mencari pengemudi...</p>
+        <div class="w-full bg-gray-200 rounded-full h-2 mb-3"><div id="progres" class="bg-primary h-2 rounded-full" style="width:30%"></div></div>
+        <button id="batalBtn" class="w-full py-2 bg-red-100 text-red-700 rounded-xl">Batalkan</button>
+    </div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white shadow-t p-3 flex justify-around">
+    <a href="#" class="text-primary text-center text-xs"><i class="fa fa-home text-lg"></i><br>Beranda</a>
+    <a href="#" class="text-gray-400 text-center text-xs"><i class="fa fa-history text-lg"></i><br>Riwayat</a>
+    <a href="#" class="text-gray-400 text-center text-xs"><i class="fa fa-user text-lg"></i><br>Akun</a>
+</nav>
+<script>
+L.map('peta').setView([-8.65,115.2],12).addLayer(L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));
+const tarif = {motor:{dasar:2000,km:2500}, mobil:{dasar:5000,km:4500}, kirim:{dasar:3000,km:3000}};
+function hitung(){
+    const jrk = Math.floor(Math.random()*12)+3;
+    const t = tarif[document.getElementById('layanan').value];
+    const total = t.dasar + (jrk*t.km);
+    document.getElementById('jarakVal').textContent = jrk+' km';
+    document.getElementById('totalVal').textContent = 'Rp '+total.toLocaleString('id-ID');
+}
+document.getElementById('layanan').addEventListener('change',hitung); hitung();
+let pros;
+document.getElementById('pesanBtn').addEventListener('click',()=>{
+    if(!document.getElementById('jemput').value||!document.getElementById('tujuan').value)return alert('Isi lokasi dulu!');
+    document.getElementById('status').classList.remove('hidden');
+    let p=30; pros=setInterval(()=>{
+        p+=10; document.getElementById('progres').style.width=p+'%';
+        if(p==60)document.getElementById('statusTxt').textContent='Pengemudi ditemukan: Wayan';
+        if(p==100){clearInterval(pros);document.getElementById('statusTxt').textContent='Pengemudi sudah sampai!';}
+    },700);
+});
+document.getElementById('batalBtn').addEventListener('click',()=>{clearInterval(pros);document.getElementById('status').classList.add('hidden');});
+</script>
+</body>
+</html>
